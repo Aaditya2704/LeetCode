@@ -1,0 +1,1 @@
+we should run two binary search operartions to find first and last. One for first and second for last
