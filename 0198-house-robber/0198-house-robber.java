@@ -9,13 +9,13 @@ class Solution {
         {return Math.max(nums[0],nums[1]);}
         
         
-        int oddHouses = 0;
-        int evenHouses = 0;
+        int odd = 0;
+        int even = 0;
         for (int i : nums) {
-            int temp = oddHouses;
-            oddHouses = Math.max(oddHouses, evenHouses);
-            evenHouses = i + temp;
+            int temp = odd;
+            odd= Math.max(odd, even);
+            even = i + temp;
         }
-        return Math.max(oddHouses, evenHouses);
+        return Math.max(odd, even);
     }
 }
