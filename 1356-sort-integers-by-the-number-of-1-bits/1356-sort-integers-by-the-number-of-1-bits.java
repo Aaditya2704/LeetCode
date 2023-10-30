@@ -1,30 +1,23 @@
 class Solution {
     public int[] sortByBits(int[] arr) {
-        Integer[] nums = Arrays.stream(arr).boxed().toArray(Integer[]::new);
-        Comparator<Integer> comparator = new CustomComparator();
-        Arrays.sort(nums, comparator);
-        return Arrays.stream(nums).mapToInt(Integer::intValue).toArray();
+        int n = arr.length;
+        int res[] = new int[n];
+        for (int i = 0; i < n; i++) {
+            res[i] = countBit(arr[i]) * 10001 + arr[i];
+        }
+        Arrays.sort(res);
+        for (int i = 0; i < n; i++) {
+            res[i] %= 10001;
+        }
+        return res;
     }
-}
 
-class CustomComparator implements Comparator<Integer> {
-    private int findWeight(int num) {
-        int weight = 0;
-        
-        while (num > 0) {
-            weight++;
-            num &= (num - 1);
+    private int countBit(int n) {
+        int res = 0;
+        while (n != 0) {
+            res += (n & 1);
+            n >>= 1;
         }
-        
-        return weight;
-    }
-    
-    @Override
-    public int compare(Integer a, Integer b) {
-        if (findWeight(a) == findWeight(b)) {
-            return a - b;
-        }
-        
-        return findWeight(a) - findWeight(b);
+        return res;
     }
 }
